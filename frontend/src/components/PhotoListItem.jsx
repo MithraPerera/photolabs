@@ -4,9 +4,9 @@ import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
 const PhotoListItem = (props) => {
-	const imageSource = props.imageSource;
-	const profilePic = props.profile;
-	const username = props.username;
+	const imageSource = props.urls.regular;
+	const profilePic = props.user.profile;
+	const username = props.user.username;
 	const city = props.location.city;
 	const country = props.location.country;
 	/* Insert React */
