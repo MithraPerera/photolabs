@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../styles/HomeRoute.scss";
 import TopNavigationBar from "components/TopNavigationBar";
 import PhotoList from "components/PhotoList";
 
-const HomeRoute = (props) => {
+const HomeRoute = ({ photos, topics }) => {
+	const [favourites, setFavourites] = useState([]);
+
 	return (
 		<div className='home-route'>
-			<TopNavigationBar topicData={props.topicData} />
-			<PhotoList photoData={props.photoData} />
+			<TopNavigationBar topics={topics} />
+			<PhotoList
+				photoList={photos}
+				favourites={favourites}
+				setFavourites={setFavourites}
+			/>
 		</div>
 	);
 };

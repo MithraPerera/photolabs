@@ -1,23 +1,35 @@
 import React from "react";
-
 import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
-const PhotoListItem = (props) => {
-	const imageSource = props.urls.regular;
-	const profilePic = props.user.profile;
-	const username = props.user.username;
-	const city = props.location.city;
-	const country = props.location.country;
-	/* Insert React */
+const PhotoListItem = ({
+	id,
+	imageSource,
+	profile,
+	username,
+	city,
+	country,
+	favourites,
+	setFavourites,
+}) => {
+	const isFavourited = favourites.includes(id);
+
+	const toggleSelect = () => {
+		const FavArray = isFavourited
+			? favourites.filter((item) => item !== id)
+			: [...favourites, id];
+
+		setFavourites(FavArray);
+	};
+
 	return (
 		<div className='photo-list__item'>
-			<PhotoFavButton />
+			<PhotoFavButton selected={isFavourited} onClick={toggleSelect} />
 			<div>
 				<img src={imageSource} className='photo-list__image' />
 			</div>
 			<div className='photo-list__user-details'>
-				<img src={profilePic} className='photo-list__user-profile' />
+				<img src={profile} className='photo-list__user-profile' />
 				<div className='photo-list__user-info'>
 					<span>{username}</span>
 					<div className='photo-list__user-location'>
