@@ -7,12 +7,20 @@ const PhotoList = ({
 	favourites,
 	setFavourites,
 	setDisplayModal,
+	setSelectedPhotoId,
 }) => {
+	// Function to be passed to PhotoListItem to display the modal by passing in the selected photo id
+	const displayModal = (id) => {
+		setSelectedPhotoId(id); // set the state to the selected photo id
+		setDisplayModal(true); // set the state of the modal to true to display it
+	};
+
 	return (
 		<ul className='photo-list'>
 			{photoList.map((photo) => (
 				<PhotoListItem
 					key={photo.id}
+					id={photo.id}
 					imageSource={photo.urls.regular}
 					profile={photo.user.profile}
 					username={photo.user.name}
@@ -20,8 +28,7 @@ const PhotoList = ({
 					country={photo.location.country}
 					favourites={favourites}
 					setFavourites={setFavourites}
-					id={Number(photo.id)}
-					setDisplayModal={setDisplayModal}
+					displayModal={displayModal}
 				/>
 			))}
 		</ul>

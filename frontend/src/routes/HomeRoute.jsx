@@ -4,7 +4,7 @@ import "../styles/HomeRoute.scss";
 import TopNavigationBar from "components/TopNavigationBar";
 import PhotoList from "components/PhotoList";
 
-const HomeRoute = ({ photos, topics, setDisplayModal }) => {
+const HomeRoute = ({ photos, topics, setDisplayModal, setSelectedPhotoId }) => {
 	const [favourites, setFavourites] = useState([]);
 
 	const isFavPhotoExist = favourites.length > 0 ? true : false;
@@ -17,6 +17,7 @@ const HomeRoute = ({ photos, topics, setDisplayModal }) => {
 				favourites={favourites}
 				setFavourites={setFavourites}
 				setDisplayModal={setDisplayModal}
+				setSelectedPhotoId={setSelectedPhotoId}
 			/>
 		</div>
 	);
