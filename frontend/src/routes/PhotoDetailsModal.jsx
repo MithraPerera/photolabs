@@ -1,16 +1,21 @@
-import React from 'react';
+import React from "react";
 
-import '../styles/PhotoDetailsModal.scss'
-import closeSymbol from '../assets/closeSymbol.svg';
+import "../styles/PhotoDetailsModal.scss";
+import closeSymbol from "../assets/closeSymbol.svg";
 
-const PhotoDetailsModal = () => {
-  return (
-    <div className="photo-details-modal">
-      <button className="photo-details-modal__close-button">
-        <img src={closeSymbol} alt="close symbol" />
-      </button>
-    </div>
-  )
+const PhotoDetailsModal = ({ displayModal, setDisplayModal }) => {
+	const showModal = () => setDisplayModal(false);
+	return (
+		<div>
+			{displayModal ? (
+				<div className='photo-details-modal'>
+					<button className='photo-details-modal__close-button'>
+						<img src={closeSymbol} alt='close symbol' onClick={showModal} />
+					</button>
+				</div>
+			) : null}
+		</div>
+	);
 };
 
 export default PhotoDetailsModal;

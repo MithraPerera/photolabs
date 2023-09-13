@@ -11,6 +11,7 @@ const PhotoListItem = ({
 	country,
 	favourites,
 	setFavourites,
+	setDisplayModal,
 }) => {
 	const isFavourited = favourites.includes(id);
 
@@ -25,7 +26,7 @@ const PhotoListItem = ({
 	return (
 		<div className='photo-list__item'>
 			<PhotoFavButton selected={isFavourited} onClick={toggleSelect} />
-			<div>
+			<div onClick={setDisplayModal}>
 				<img src={imageSource} className='photo-list__image' />
 			</div>
 			<div className='photo-list__user-details'>
