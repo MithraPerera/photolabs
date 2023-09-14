@@ -9,6 +9,7 @@ import PhotoDetailsModal from "routes/PhotoDetailsModal";
 const App = () => {
 	const [displayModal, setDisplayModal] = useState(false);
 	const [clickedPhotoId, setSelectedPhotoId] = useState(0);
+	const [favourites, setFavourites] = useState([]);
 
 	const getClickedPhotoInfo = () => {
 		return photos.find((photo) => photo.id === clickedPhotoId);
@@ -21,12 +22,16 @@ const App = () => {
 				topics={topics}
 				setDisplayModal={setDisplayModal}
 				setSelectedPhotoId={setSelectedPhotoId}
+				favourites={favourites}
+				setFavourites={setFavourites}
 			/>
 			<PhotoDetailsModal
 				displayModal={displayModal}
 				setDisplayModal={setDisplayModal}
 				setSelectedPhotoId={setSelectedPhotoId}
-				getClickedPhotoInfo={getClickedPhotoInfo()}
+				getClickedPhotoInfo={getClickedPhotoInfo}
+				favourites={favourites}
+				setFavourites={setFavourites}
 			/>
 		</div>
 	);
