@@ -8,31 +8,14 @@ import PhotoList from "components/PhotoList";
 
 const PhotoDetailsModal = ({
 	displayModal,
-	setDisplayModal,
-	setSelectedPhotoId,
-	getClickedPhotoInfo,
 	favourites,
-	setFavourites,
+	openModal,
+	getClickedPhotoInfo,
+	toggleFavourite,
+	closeModal,
+	isFavourited,
 }) => {
-	// OnClick handler function - close the modal
-	const closeModal = () => {
-		setDisplayModal(false); // close the modal
-		setSelectedPhotoId(0); // reset the selected photoid to 0 which is null
-	};
-
 	const getClickedPhoto = { ...getClickedPhotoInfo() };
-
-	// Return True or False if the PhotoList Photo is part of the favourited list of photos
-	const isFavourited = favourites.includes(getClickedPhoto.id);
-
-	// OnClick Handler function to add the photo id to the favourited list if it is not already included in it. If it is already included, it is removed from the favourited list.
-	const toggleSelect = () => {
-		const FavArray = isFavourited
-			? favourites.filter((item) => item !== getClickedPhoto.id)
-			: [...favourites, getClickedPhoto.id];
-
-		setFavourites(FavArray);
-	};
 
 	// Get the object of similar photos from the data in the form of a similar_photos object of photo objects
 	const similarPhotos = getClickedPhoto?.similar_photos || [];
@@ -47,14 +30,18 @@ const PhotoDetailsModal = ({
 			{displayModal ? (
 				<div className='photo-details-modal'>
 					<button className='photo-details-modal__close-button'>
-						<img src={closeSymbol} alt='close symbol' onClick={closeModal} />
+						<img
+							src={closeSymbol}
+							alt='close symbol'
+							onClick={() => closeModal()}
+						/>
 					</button>
 					<div className='photo-details-modal__images'>
 						<div className='photo-details-modal__image-container'>
 							<div>
 								<PhotoFavButton
-									selected={isFavourited}
-									onClick={toggleSelect}
+									selected={isFavourited(getClickedPhoto.id)}
+									onClick={() => toggleFavourite(getClickedPhoto.id)}
 								/>
 							</div>
 							<img
@@ -81,9 +68,9 @@ const PhotoDetailsModal = ({
 							className='photo-details-modal--images'
 							photoList={similarPhotosArray}
 							favourites={favourites}
-							setFavourites={setFavourites}
-							setDisplayModal={setDisplayModal}
-							setSelectedPhotoId={setSelectedPhotoId}
+							toggleFavourite={toggleFavourite}
+							openModal={openModal}
+							isFavourited={isFavourited}
 						/>
 					</div>
 				</div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "../styles/HomeRoute.scss";
 import TopNavigationBar from "components/TopNavigationBar";
@@ -7,13 +7,11 @@ import PhotoList from "components/PhotoList";
 const HomeRoute = ({
 	photos,
 	topics,
-	setDisplayModal,
-	setSelectedPhotoId,
 	favourites,
-	setFavourites,
+	openModal,
+	toggleFavourite,
+	isFavourited,
 }) => {
-	// const [favourites, setFavourites] = useState([]);
-
 	const isFavPhotoExist = favourites.length > 0 ? true : false;
 
 	return (
@@ -21,10 +19,9 @@ const HomeRoute = ({
 			<TopNavigationBar topics={topics} isFavPhotoExist={isFavPhotoExist} />
 			<PhotoList
 				photoList={photos}
-				favourites={favourites}
-				setFavourites={setFavourites}
-				setDisplayModal={setDisplayModal}
-				setSelectedPhotoId={setSelectedPhotoId}
+				toggleFavourite={toggleFavourite}
+				openModal={openModal}
+				isFavourited={isFavourited}
 			/>
 		</div>
 	);

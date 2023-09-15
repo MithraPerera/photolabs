@@ -9,31 +9,17 @@ const PhotoListItem = ({
 	username,
 	city,
 	country,
-	favourites,
-	setFavourites,
-	displayModal,
+	toggleFavourite,
+	openModal,
+	isFavourited,
 }) => {
-	// Return True or False if the PhotoList Photo is part of the favourited list of photos
-	const isFavourited = favourites.includes(id);
-
-	// OnClick Handler function to add the photo id to the favourited list if it is not already included in it. If it is already included, it is removed from the favourited list.
-	const toggleSelect = () => {
-		const FavArray = isFavourited
-			? favourites.filter((item) => item !== id)
-			: [...favourites, id];
-
-		setFavourites(FavArray);
-	};
-
-	// OnClick handler function to pass the id of the photo that is selected to the PhotoDetailsModal
-	const imageSelect = () => {
-		displayModal(id);
-	};
-
 	return (
 		<div className='photo-list__item'>
-			<PhotoFavButton selected={isFavourited} onClick={toggleSelect} />
-			<div onClick={imageSelect}>
+			<PhotoFavButton
+				selected={isFavourited(id)}
+				onClick={() => toggleFavourite(id)}
+			/>
+			<div onClick={() => openModal(id)}>
 				<img src={imageSource} className='photo-list__image' />
 			</div>
 			<div className='photo-list__user-details'>

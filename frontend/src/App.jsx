@@ -1,37 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.scss";
 import HomeRoute from "routes/HomeRoute";
-import photos from "mocks/photos";
-import topics from "mocks/topics";
 import PhotoDetailsModal from "routes/PhotoDetailsModal";
+import useApplicationData from "hooks/useApplicationData";
 
 // Note: Rendering a single component to build components in isolation
 const App = () => {
-	const [displayModal, setDisplayModal] = useState(false);
-	const [clickedPhotoId, setSelectedPhotoId] = useState(0);
-	const [favourites, setFavourites] = useState([]);
-
-	const getClickedPhotoInfo = () => {
-		return photos.find((photo) => photo.id === clickedPhotoId);
-	};
+	const {
+		state,
+		getClickedPhotoInfo,
+		isFavourited,
+		openModal,
+		closeModal,
+		toggleFavourite,
+	} = useApplicationData();
 
 	return (
 		<div className='App'>
 			<HomeRoute
-				photos={photos}
-				topics={topics}
-				setDisplayModal={setDisplayModal}
-				setSelectedPhotoId={setSelectedPhotoId}
-				favourites={favourites}
-				setFavourites={setFavourites}
+				photos={state.photos}
+				topics={state.topics}
+				favourites={state.favourites}
+				openModal={openModal}
+				toggleFavourite={toggleFavourite}
+				isFavourited={isFavourited}
 			/>
 			<PhotoDetailsModal
-				displayModal={displayModal}
-				setDisplayModal={setDisplayModal}
-				setSelectedPhotoId={setSelectedPhotoId}
+				displayModal={state.displayModal}
+				favourites={state.favourites}
+				openModal={openModal}
 				getClickedPhotoInfo={getClickedPhotoInfo}
-				favourites={favourites}
-				setFavourites={setFavourites}
+				toggleFavourite={toggleFavourite}
+				closeModal={closeModal}
+				isFavourited={isFavourited}
 			/>
 		</div>
 	);
