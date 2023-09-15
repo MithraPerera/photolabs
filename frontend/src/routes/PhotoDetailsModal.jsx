@@ -1,6 +1,7 @@
 import React from "react";
 
 import "../styles/PhotoDetailsModal.scss";
+import "../styles/PhotoListItem.scss";
 import closeSymbol from "../assets/closeSymbol.svg";
 import PhotoFavButton from "components/PhotoFavButton";
 import PhotoList from "components/PhotoList";
@@ -61,8 +62,21 @@ const PhotoDetailsModal = ({
 								src={getClickedPhoto.urls.full}
 								alt='photo-image'
 							/>
+							<div className='photo-list__user-details'>
+								<img
+									className='photo-list__user-profile'
+									src={getClickedPhoto.user.profile}
+								/>
+								<div className='photo-list__user-info'>
+									<span>{getClickedPhoto.user.name}</span>
+									<br />
+									<span className='photo-list__user-location'>{`${getClickedPhoto.location.city}, ${getClickedPhoto.location.country}`}</span>
+								</div>
+							</div>
 						</div>
-						<h1 className='photo-details-modal__header'>Similar Photos</h1>
+						<p className='photo-details-modal__header divider'>
+							Related Photos
+						</p>
 						<PhotoList
 							className='photo-details-modal--images'
 							photoList={similarPhotosArray}
