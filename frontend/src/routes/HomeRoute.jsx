@@ -11,12 +11,17 @@ const HomeRoute = ({
 	openModal,
 	toggleFavourite,
 	isFavourited,
+	fetchPhotosByTopic,
 }) => {
 	const isFavPhotoExist = favourites.length > 0 ? true : false;
 
 	return (
 		<div className='home-route'>
-			<TopNavigationBar topics={topics} isFavPhotoExist={isFavPhotoExist} />
+			<TopNavigationBar
+				topics={topics}
+				isFavPhotoExist={isFavPhotoExist}
+				fetchPhotosByTopic={fetchPhotosByTopic}
+			/>
 			<PhotoList
 				photoList={photos}
 				toggleFavourite={toggleFavourite}

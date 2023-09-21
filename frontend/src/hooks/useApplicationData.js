@@ -17,6 +17,7 @@ export const ACTIONS = {
   SET_DISPLAY_MODAL: 'SET_DISPLAY_MODAL',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS'
 };
 
 const reducer = (state, action) => {
@@ -29,6 +30,8 @@ const reducer = (state, action) => {
       return { ...state, photos: action.payload };
     case ACTIONS.SET_TOPIC_DATA:
       return { ...state, topics: action.payload };
+    case ACTIONS.GET_PHOTOS_BY_TOPIC:
+      return { ...state, photos: action.payload };
   }
 };
 
@@ -97,13 +100,21 @@ const useApplicationData = () => {
       });
   });
 
+  // Fetch photos by topic 
+  const fetchPhotosByTopic = (id) => {
+    fetch(`/api/topics/photos/${id}`)
+      .then((res) => res.json())
+      .then((data) => dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPIC, payload: data }));
+  };
+
   return {
     state,
     getClickedPhotoInfo,
     isFavourited,
     openModal,
     closeModal,
-    toggleFavourite
+    toggleFavourite,
+    fetchPhotosByTopic
   };
 
 };
